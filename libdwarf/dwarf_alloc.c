@@ -30,8 +30,8 @@
 #include "dwarf_incl.h"
 #include <sys/types.h>
 
-#include <stdlib.h>
-#include <stdio.h>
+// #include <stdlib.h>
+// #include <stdio.h>
 
 /*  These files are included to get the sizes
     of structs for malloc.

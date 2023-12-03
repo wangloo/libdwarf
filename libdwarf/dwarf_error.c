@@ -33,10 +33,10 @@
 #include <elf.h>
 #endif
 
-#include <stdio.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <sys/stat.h>
+// #include <sys/types.h>
+// #include <stdlib.h>
 
 /* Array to hold string representation of errors. Any time a
    define is added to the list in libdwarf.h, a string should be
@@ -107,11 +107,14 @@ _dwarf_error(Dwarf_Debug dbg, Dwarf_Error * error, Dwarf_Sword errval)
         dbg->de_errhand(errptr, dbg->de_errarg);
         return;
     }
-    fflush(stdout);
-    fprintf(stdout,
-        "\nNow abort() in libdwarf. "
+    // fflush(stdout);
+    // fprintf(stdout,
+    //     "\nNow abort() in libdwarf. "
+    //     "No error argument or handler available.\n");
+    printf( "\nNow abort() in libdwarf. "
         "No error argument or handler available.\n");
-    fflush(stdout);
+
+    // fflush(stdout);
     abort();
 }
 
