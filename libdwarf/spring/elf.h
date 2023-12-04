@@ -43,3 +43,17 @@ struct proghdr {
   uint64 memsz;
   uint64 align;
 };
+
+// Section header
+struct secthdr {
+  uint32 name;   // Section name (string tbl index)
+  uint32 type;   // Section type
+  uint64 flags;  // Section flags
+  uint64 addr;   // Section virtual addr at execution
+  uint64 offset; // Section file offset
+  uint64 size;   // Section size in bytes
+  uint32 link;   // Link to another section
+  uint32 info;   // Additional section information
+  uint64 addralign; // Section aligment
+  uint64 entsize;  // Entry size if section holds table 
+};

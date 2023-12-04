@@ -126,7 +126,9 @@ OBJS= dwarf_abbrev.o \
         pro_vars.o \
         pro_macinfo.o \
         pro_weaks.o   \
-  spring.o
+  spring.o   \
+        spr_elf_access.o
+
         
 
 all: gennames errmsg_check @build_shared@ @build_nonshared@
