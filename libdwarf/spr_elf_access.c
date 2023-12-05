@@ -301,3 +301,14 @@ spr_dwarf_elf_object_access_init(struct ramdisk_file *file, struct elfhdr *elf,
     *ret_obj = intfc;
     return DW_DLV_OK;
 }
+
+
+/* Clean up the Dwarf_Obj_Access_Interface returned by elf_access_init.  */
+void
+spr_dwarf_elf_object_access_finish(Dwarf_Obj_Access_Interface* obj)
+{
+  if (!obj)
+    return;
+  free(obj->object);
+  free(obj);
+}

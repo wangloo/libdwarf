@@ -69,7 +69,6 @@ dwarf_init_rd(struct ramdisk_file *file,
     Dwarf_Ptr errarg, Dwarf_Debug * ret_dbg, Dwarf_Error * error)
 {
   struct elfhdr elf;
-  printf("return OK\n");
   if (access != DW_DLC_READ) {
       DWARF_DBG_ERROR(NULL, DW_DLE_INIT_ACCESS_WRONG, DW_DLV_ERROR);
   }
@@ -84,4 +83,23 @@ dwarf_init_rd(struct ramdisk_file *file,
                                         errhand, errarg, ret_dbg, error);
 bad:
   return DW_DLV_ERROR;
+}
+
+/*
+    Frees all memory that was not previously freed
+    by dwarf_dealloc.
+    Aside from certain categories.
+
+    This is only applicable when dwarf_init() or dwarf_elf_init()
+    was used to init 'dbg'.
+*/
+int
+dwarf_finish_rd(Dwarf_Debug dbg, Dwarf_Error * error)
+{
+    if(!dbg) {
+        DWARF_DBG_ERROR(NULL, DW_DLE_DBG_NULL, DW_DLV_ERROR);
+    }
+    spr_dwarf_elf_object_access_finish(dbg->de_obj_file);
+
+    return dwarf_object_finish(dbg, error);
 }
