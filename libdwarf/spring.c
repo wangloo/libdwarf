@@ -68,18 +68,20 @@ dwarf_init_rd(struct ramdisk_file *file,
     Dwarf_Handler errhand,
     Dwarf_Ptr errarg, Dwarf_Debug * ret_dbg, Dwarf_Error * error)
 {
-  struct elfhdr elf;
+  struct elfhdr *elf;
   if (access != DW_DLC_READ) {
       DWARF_DBG_ERROR(NULL, DW_DLE_INIT_ACCESS_WRONG, DW_DLV_ERROR);
   }
 
-  if (ramdisk_read(file, &elf, sizeof(elf), 0) != sizeof(elf)) {
+  elf = malloc(sizeof(*elf));
+
+  if (ramdisk_read(file, elf, sizeof(*elf), 0) != sizeof(*elf)) {
     goto bad;
   }
-  if (elf.magic != ELF_MAGIC)
+  if (elf->magic != ELF_MAGIC)
       goto bad;
 
-  return dwarf_elf_init_file_ownership(file, &elf, TRUE, access, 
+  return dwarf_elf_init_file_ownership(file, elf, TRUE, access, 
                                         errhand, errarg, ret_dbg, error);
 bad:
   return DW_DLV_ERROR;

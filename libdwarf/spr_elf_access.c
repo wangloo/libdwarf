@@ -194,6 +194,7 @@ spr_dwarf_elf_object_access_load_section(void* obj_in,
     return DW_DLV_ERROR;    
   }
 
+  *section_data = data;
   return DW_DLV_OK;
 }
 
@@ -309,6 +310,9 @@ spr_dwarf_elf_object_access_finish(Dwarf_Obj_Access_Interface* obj)
 {
   if (!obj)
     return;
+
+  if (obj->object)
+      free(((dwarf_elf_object_access_internals_t *)obj->object)->ehdr);
   free(obj->object);
   free(obj);
 }
