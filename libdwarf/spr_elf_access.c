@@ -71,7 +71,7 @@ spr_elf_get_strptr(struct ramdisk_file *file, struct elfhdr *elf,
   *strp = malloc(128); // For simple implementation
 
   // names in strtbl is null-terminated, so it's safe
-  if (ramdisk_read(file, *strp, 256, sh.offset+offset) <= 0) {
+  if (ramdisk_read(file, *strp, 128, sh.offset+offset) <= 0) {
     free(*strp);
     return DW_DLV_ERROR;
   }

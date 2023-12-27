@@ -1,4 +1,5 @@
 extern void *kalloc(unsigned long size);
+extern void *kallocz(unsigned long size);
 extern void  kfree(void *addr);
 extern void *memcpy(void *dest, const void *src, unsigned long n);
 extern int printf(const char *format, ...);
@@ -22,7 +23,7 @@ malloc(unsigned long size)
 static inline void *
 calloc(unsigned long nmemb, unsigned long size)
 {
-  return kalloc(nmemb*size);
+  return kallocz(nmemb*size);
 }
 
 static inline void
